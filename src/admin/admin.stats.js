@@ -1,6 +1,7 @@
 const express = require('express');
 const Order = require('../orders/order.model');
 const Book = require('../books/book.model');
+const verifyAdminToken = require('../middleware/verifyAdminToken');
 const router = express.Router();
 
 router.get('/stats', verifyAdminToken, async (req, res) => {
