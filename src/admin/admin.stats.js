@@ -3,7 +3,7 @@ const Order = require('../orders/order.model');
 const Book = require('../books/book.model');
 const router = express.Router();
 
-router.get('/stats', async (req, res) => {
+router.get('/stats', verifyAdminToken, async (req, res) => {
     try {
         //  1. Get total number of orders from the database by counting the number of documents in the Order collection
         // The countDocuments() method is used to count the number of documents that match the specified query criteria
