@@ -15,12 +15,12 @@ router.get('/stats', verifyAdminToken, async (req, res) => {
         const totalSales = await Order.aggregate([
             {
                 //$group is an aggregation operator that groups documents by a specified expression and applies accumulator expressions
-                //to each group of documents
+                //to each group of documents and round of to 2 decimal places
                 $group: {
                     _id: null,
                     totalSales: {
                         //$sum is an accumulator operator that calculates the sum of numeric values
-                        $sum: '$totalPrice'
+                        $sum: { $round: ["$totalPrice", 2] }
                     }
                 }
             }
