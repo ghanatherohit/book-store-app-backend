@@ -25,7 +25,7 @@ router.get('/stats', verifyAdminToken, async (req, res) => {
                 }
             }
         ]);
-
+ 
         // 3. Trending books Statistics from query
         const trendingBooksCount = await Book.aggregate([
             { $match: { trending: true } },
