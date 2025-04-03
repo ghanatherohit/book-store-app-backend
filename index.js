@@ -41,6 +41,7 @@ require('dotenv').config();
 app.use(express.json());
 app.use(cors({
   origin: ['http://localhost:5173','https://book-store-app-frontend-phi.vercel.app','https://book-store-app-git-3da3a8-2004ghanatherohit-gmailcoms-projects.vercel.app'],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
