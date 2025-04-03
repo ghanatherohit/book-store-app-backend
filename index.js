@@ -40,27 +40,21 @@ const dotenv = require("dotenv");
 //dotenv is a zero-dependency module that loads environment variables from a .env file into process.env.
 dotenv.config();
 
-app.use(helmet()); // Secure headers
-app.use(mongoSanitize()); // Prevent MongoDB NoSQL Injection
-app.use(xssClean()); // Prevent XSS attacks
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per window
-  message: "Too many requests from this IP, please try again later.",
-});
-app.use(limiter);
-
-
-//middleware
-// Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application's request-response cycle.
 
 //app uses the express.json() middleware to parse incoming requests with JSON payloads.
 app.use(express.json());
 app.use(cors({
-  origin: ['http://localhost:5173','https://book-store-app-frontend-phi.vercel.app','https://book-store-app-git-3da3a8-2004ghanatherohit-gmailcoms-projects.vercel.app'],
+  origin: ['http://localhost:5173', 'https://book-store-app-frontend-phi.vercel.app', 'https://book-store-app-git-3da3a8-2004ghanatherohit-gmailcoms-projects.vercel.app'],
   credentials: true
 }));
+
+app.use(helmet());  
+app.use(mongoSanitize());
+app.use(xssClean()); 
+
+
+//middleware
+// Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application's request-response cycle.
 
 
 // This means that if the PORT environment variable is set, the server will listen on that port. Otherwise, it will listen on port 5000.
@@ -94,4 +88,3 @@ main().then(() => console.log("Mongodb connected successfully!")).catch(err => c
 app.listen(port, () => {
   console.log(`The server is running on port ${port}`)
 })
- 
