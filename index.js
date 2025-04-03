@@ -41,7 +41,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 app.use(helmet()); // Secure headers
-app.use(express.json()); // Parse JSON request body
 app.use(mongoSanitize()); // Prevent MongoDB NoSQL Injection
 app.use(xssClean()); // Prevent XSS attacks
 
