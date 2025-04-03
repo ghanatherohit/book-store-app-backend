@@ -30,11 +30,6 @@ const cors = require('cors')
 // Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
 const mongoose = require('mongoose');
 
-
-const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
-const mongoSanitize = require("express-mongo-sanitize");
-const xssClean = require("xss-clean");
 const dotenv = require("dotenv");
 
 //dotenv is a zero-dependency module that loads environment variables from a .env file into process.env.
@@ -47,10 +42,6 @@ app.use(cors({
   origin: ['http://localhost:5173', 'https://book-store-app-frontend-phi.vercel.app', 'https://book-store-app-git-3da3a8-2004ghanatherohit-gmailcoms-projects.vercel.app'],
   credentials: true
 }));
-
-app.use(helmet());  
-app.use(mongoSanitize());
-app.use(xssClean()); 
 
 
 //middleware
