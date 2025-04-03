@@ -30,8 +30,27 @@ const cors = require('cors')
 // Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
 const mongoose = require('mongoose');
 
+
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const mongoSanitize = require("express-mongo-sanitize");
+const xssClean = require("xss-clean");
+const dotenv = require("dotenv");
+
 //dotenv is a zero-dependency module that loads environment variables from a .env file into process.env.
-require('dotenv').config();
+dotenv.config();
+
+app.use(helmet()); // Secure headers
+app.use(express.json()); // Parse JSON request body
+app.use(mongoSanitize()); // Prevent MongoDB NoSQL Injection
+app.use(xssClean()); // Prevent XSS attacks
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per window
+  message: "Too many requests from this IP, please try again later.",
+});
+app.use(limiter);
 
 
 //middleware
